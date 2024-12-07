@@ -20,13 +20,48 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDao appDao) {
 		return runner -> {
-			createInstructor(appDao);
+//			createInstructor(appDao);
+//			findInstructor(appDao);
+
+//			deleteInstructor(appDao);
+
+//			findInstructorDetail(appDao);
+
+			deleteInstructorDetail(appDao);
 		};
 	}
 
+	private void deleteInstructorDetail(AppDao appDao) {
+		long theId = 1;
+		appDao.deleteInstructorDetailById(theId);
+	}
+
+	private void findInstructorDetail(AppDao appDao) {
+		long theId = 1;
+
+		System.out.println("Finding instructor detail with id " + theId);
+		InstructorDetail instructorDetail = appDao.findInstructorDetailById(theId);
+		System.out.println(instructorDetail);
+	}
+
+	private void deleteInstructor(AppDao appDao) {
+		long theID = 2;
+		System.out.println("Deleting Instructor with ID " + theID);
+		appDao.deleteById(theID);
+	}
+
+	private void findInstructor(AppDao appDao) {
+		long theId = 1;
+		System.out.println("Finding instructor id: " + theId);
+
+		Instructor instructor = appDao.findById(theId);
+		System.out.println("Found instructor: " + instructor);
+		System.out.println("Associated instructor detail: " + instructor.getInstructorDetail());
+	}
+
 	private void createInstructor(AppDao appDao) {
-		Instructor instructor = new Instructor("Atiq", "Rony", "atiq@gmail.com");
-		InstructorDetail instructorDetail = new InstructorDetail("Animal", "Coding");
+		Instructor instructor = new Instructor("Ripu", "Rony", "ripu@gmail.com");
+		InstructorDetail instructorDetail = new InstructorDetail("Source codes", "Coding");
 		instructor.setInstructorDetail(instructorDetail);
 		appDao.save(instructor);
 	}
